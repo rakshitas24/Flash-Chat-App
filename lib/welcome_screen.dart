@@ -61,10 +61,6 @@ void dispose() {
                 child: AnimatedTextKit(
                   animatedTexts: [TypewriterAnimatedText('Flash Chat')]),
                 ),
-                Text(
-                  'Flash Chat',
-                  
-                ),
               ],
             ),
             SizedBox(
