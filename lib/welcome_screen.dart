@@ -1,19 +1,42 @@
-// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, sort_child_properties_last, sized_box_for_whitespace, prefer_const_constructors
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, sort_child_properties_last, sized_box_for_whitespace, prefer_const_constructors, avoid_print
 
 import 'package:flash_chat/login_screen.dart';
 import 'package:flash_chat/registration_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderStateMixin{
+  
+
+late AnimationController controller;
+late Animation animation;
+
+@override
+void initState() {
+  super.initState();
+  controller = AnimationController(duration: Duration(seconds: 1), vsync: this);
+  animation = ColorTween(begin: Colors.blueGrey, end: Colors.white).animate(controller);
+  controller.forward();
+  controller.addListener(() {
+    setState(() {});
+  });
+}
+
+@override 
+void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: animation.value,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -29,13 +52,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     height: 60.0,
                   ),
                 ),
+                DefaultTextStyle(
+                style: TextStyle(
+                    fontSize: 40.0,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.black,
+                  ), 
+                child: AnimatedTextKit(
+                  animatedTexts: [TypewriterAnimatedText('Flash Chat')]),
+                ),
                 Text(
                   'Flash Chat',
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.grey[600],
-                  ),
+                  
                 ),
               ],
             ),
@@ -57,6 +85,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   height: 42.0,
                   child: Text(
                     'Log In',
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
@@ -76,6 +105,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   height: 42.0,
                   child: Text(
                     'Register',
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
