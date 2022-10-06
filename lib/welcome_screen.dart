@@ -1,5 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, sort_child_properties_last, sized_box_for_whitespace, prefer_const_constructors
 
+import 'package:flash_chat/login_screen.dart';
+import 'package:flash_chat/registration_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -20,15 +22,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Container(
-                  child: Image.asset('images/logo.png'),
-                  height: 60.0,
+                Hero(
+                  tag: 'logo',
+                  child: Container(
+                    child: Image.asset('images/logo.png'),
+                    height: 60.0,
+                  ),
                 ),
                 Text(
                   'Flash Chat',
                   style: TextStyle(
                     fontSize: 45.0,
                     fontWeight: FontWeight.w900,
+                    color: Colors.grey[600],
                   ),
                 ),
               ],
@@ -45,6 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: MaterialButton(
                   onPressed: () {
                     //Go to login screen.
+                    Navigator.push(context, MaterialPageRoute(builder: ((context) => LoginScreen())));
                   },
                   minWidth: 200.0,
                   height: 42.0,
@@ -63,6 +70,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: MaterialButton(
                   onPressed: () {
                     //Go to registration screen.
+                    Navigator.push(context, MaterialPageRoute(builder: ((context) => RegistrationScreen())));
                   },
                   minWidth: 200.0,
                   height: 42.0,
